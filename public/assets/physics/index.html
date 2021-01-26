@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EM-Waves</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="description" content="">
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.scrollTo(0, 1);
+    </script>
+</head>
+
+<body>
+    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: false">
+
+        <a-camera id="default_angle" camera rotation="0 90 0" position="0 1.6 0" look-controls wasd-controls>
+            <a-entity id="rig" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
+                <a-entity id="mouseCursor" cursor="fuse: true; fuseTimeout: 1000" raycaster="objects: .clickable" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: white; shader: flat; opacity: 0.8" event-set__1="_event: mouseenter; color: springgreen"
+                    event-set__2="_event: mouseleave; color: white" animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1000; from: 1 1 1; to: 0.5 0.5 0.5" animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 200; to: 1 1 1"
+                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 200; to: 1 1 1">
+                </a-entity>
+        </a-camera>
+        <!-- Asset Management -->
+        <a-assets>
+            <img id="blur-image-01" src="assets/2d/glow-gradient/Glow02.png">
+            <img id="glow-image" src="assets/2d/glow-gradient/Glow02.png">
+            <img id="info-logo" src="assets//2d/image/info-logo.png">
+            <img id="start-learning" src="assets//2d/image/start-learning.png">
+            <a-asset-item id="street-lamp-obj" src="assets/3d/street-light/model.gltf"></a-asset-item>
+            <a-asset-item id="street-lamp-mtl" src="assets/3d/street-light/materials.mtl"></a-asset-item>
+            <a-asset-item id="hologram-glb" src="assets/3d/hologram/hologram.glb"></a-asset-item>
+            <a-asset-item id="downhill-glb" src="assets/3d/downhill/downhill.glb"></a-asset-item>
+            <a-asset-item id="em-waves-glb" src="assets/3d/em-waves/em-waves-01.glb"></a-asset-item>
+            <a-asset-item id="vector" src="assets/3d/em-waves/vector.glb"></a-asset-item>
+        </a-assets>
+
+        <a-entity id="environment" rotation="0" position="0 0 0">
+            <a-entity id="3d" rotation="0" position="0 0 0">
+                <a-entity gltf-model="#downhill-glb" scale="0.5 0.5 0.5" rotation="0 90 0" position="0 0 5"></a-entity>
+
+                <a-entity gltf-model="#hologram-glb" scale="0.5 0.5 0.5" position="-0.3 0 -2.5" rotation="0 -45 0"></a-entity>
+
+                <!--a-entity id="em-waves" gltf-model="#em-waves-glb" scale="1 1 1" position="0 1 -2" rotation="0 0 0" visible="false" animation-mixer>
+                </a-entity-->
+                <a-entity id="em-waves" rotation="0" position="0 0 0" visible="false">
+                    <a-entity id="vector" gltf-model="#vector" scale="0.5 0.5 0.3" position="0 1 -2" rotation="0 0 0" visible="true"></a-entity>
+                    <a-entity class="clickable" id="electric-field" gltf-model="#vector" material="shader:flat; color:red" scale="0.2 0.5 0.3" position="-0.61 1 -1.75" rotation="0 -90 0" visible="true"></a-entity>
+                    <a-entity class="clickable" id="magnetic-field" gltf-model="#vector" scale="0.2 0.5 0.3" position="-0.61 1.25 -1.98" rotation="0 -90 90" visible="true"></a-entity>
+                </a-entity>
+
+                <a-entity geometry="primitive: sphere" material="src:#blur-image-01" position="0 100 -100"></a-entity>
+            </a-entity>
+
+            <a-entity id="2d" rotation="0" position="0 0 0">
+                <a-image src="#glow-image" position="0.1 0.7 -2" rotation="90 0 0" width="2" height="2"></a-image>
+
+                <a-image class="clickable" id="info" src="#info-logo" position="0.05 1.3 -1." rotation="0 0 0" scale="0.1 0.1 0.1" visible="true" animation="property: scale; to: 0.2 0.2 0.2; dur:2000; easing: linear; loop: true">
+                </a-image>
+
+                <a-entity id="intro" text="font: roboto; value: Electromagnetic waves or EM waves are waves that are created as a result of vibrations between an electric field and a magnetic field." position="-0.5 1.5 -1" rotation="0 30 0" visible="false">
+                </a-entity>
+                <a-image class="clickable" id="startSimulation" src="#start-learning" width="0.4" height="0.2" position="-0.7 1.3 -0.8" rotation="0 30 0" visible="false"></a-image>
+
+                <!-- Mode two prototype -->
+                <a-entity></a-entity>
+                <!--a-image src="#glow-image" position="0 0.8 -1" rotation="90 0 0" width="2" height="1"></a-image-->
+                <a-entity geometry="primitive:plane" material="color:#00E6FF" position="0.1 0.6 -1.2" scale="0.8 0.2 0.5" rotation="-60 0 0"></a-entity>
+                <a-entity class="clickable" id="gamma" geometry="primitive:plane" material="color:red" position="0.3 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
+                <a-entity class="clickable" id="x-ray" geometry="primitive:plane" material="color:green" position="-0.1 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
+                <a-entity class="clickable" id="ultraviolet" geometry="primitive:plane" material="color:white" position="0.1 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
+            </a-entity>
+
+            <a-entity id="default-entity">
+                <a-sky color="#ECECEC "></a-sky>
+            </a-entity>
+
+            <a-entity id="lighting" rotation="0" position="0">
+                <a-entity light="type:directional; intensity:0.6; color:#00E6FF" position="1.4 3.6 -5"></a-entity>
+                <a-entity light="type:point; intensity:0.3; color:#00E6FF" position="1.4 3.6 -5"></a-entity>
+                <a-entity light="type:point; intensity:1; color:#FF1818" position="1.4 3.6"></a-entity>
+                <a-entity light="type:point; intensity:0.5; color:#FFF"></a-entity>
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="hotspots" rotation="0">
+
+        </a-entity>
+    </a-scene>
+
+    <script type="text/javascript">
+        //Create a dialogue system so the user has a guide which one to interact with. 
+
+        //declaration of variable
+        let infoBtn = document.querySelector('#info')
+        let introduction = document.querySelector('#intro')
+        let startSim = document.querySelector('#startSimulation')
+
+        let gamma = document.querySelector('#gamma')
+        let xRay = document.querySelector('#x-ray')
+        let ultraViolet = document.querySelector('#ultraviolet')
+
+
+        document.querySelector('#info').addEventListener('click', function(e) {
+            document.querySelector('#intro').setAttribute('visible', 'true');
+            document.querySelector('#em-waves').setAttribute('visible', 'true');
+            document.querySelector('#startSimulation').setAttribute('visible', 'true');
+
+            //remove the a-entity, not hide because if you only hide the entity. you ca still interact it in the scene.
+            infoBtn.remove();
+
+
+        });
+
+        document.querySelector('#startSimulation').addEventListener('click', function(e) {
+            introduction.remove();
+            startSim.remove();
+            document.getElementById("default_angle").setAttribute('position', {
+                x: 0,
+                y: 1.6,
+                z: -0.6
+            })
+        });
+
+        gamma.addEventListener('click', function(e) {
+            document.getElementById("em-waves").setAttribute('scale', {
+                x: 0.3,
+                y: 0.3,
+                z: 0.3
+            })
+        });
+
+        xRay.addEventListener('click', function(e) {
+            document.getElementById("em-waves").setAttribute('scale', {
+                x: 0.5,
+                y: 0.5,
+                z: 0.5
+            })
+        });
+
+        ultraviolet.addEventListener('click', function(e) {
+            document.getElementById("em-waves").setAttribute('scale', {
+                x: 0.8,
+                y: 0.8,
+                z: 0.8
+            })
+        });
+
+
+        let magneticField = document.querySelector('#magnetic-field');
+        let electricField = document.querySelector('#electric-field');
+
+        magneticField.addEventListener('click', function(e) {
+            console.log("magnetic field");
+        });
+
+        electricField.addEventListener('click', function(e) {
+            console.log("electric field");
+        });
+    </script>
+</body>
+
+</html>

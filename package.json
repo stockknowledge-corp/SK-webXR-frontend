@@ -1,0 +1,21 @@
+{
+    "name": "skwebxr",
+    "version": "1.0.0",
+    "description": "(c) StockKnowledge Corp.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index",
+        "dev": "nodemon index"
+    },
+    "author": "Stock Knowledge",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "Stock Knowledge WebXR"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.17.1",
+        "nodemon": "^2.0.7"
+    }
+}
