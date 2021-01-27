@@ -15,7 +15,16 @@
 </head>
 
 <body>
+    <div class="audio">
+        <audio src="assets/audio/wavelength.mp3" id="wavelength"></audio>
+        <audio src="assets/audio/period.mp3" id="period"></audio>
+        <audio src="assets/audio/amplitude.mp3" id="amplitude"></audio>
+        <audio src="assets/audio/welcomephysics.mp3" id="welcome"></audio>
+        <audio src="assets/audio/em-waves.mp3" id="em"></audio>
+        <audio src="assets/audio/gazeOnPoint.mp3" id="gaze"></audio>
+    </div>
     <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: false">
+
 
         <a-camera id="default_angle" camera rotation="0 90 0" position="0 1.6 0" look-controls wasd-controls>
             <a-entity id="rig" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
@@ -28,13 +37,24 @@
         <a-assets>
             <img id="blur-image-01" src="assets/2d/glow-gradient/Glow02.png">
             <img id="glow-image" src="assets/2d/glow-gradient/Glow02.png">
-            <img id="info-logo" src="assets//2d/image/info-logo.png">
-            <img id="start-learning" src="assets//2d/image/start-learning.png">
+            <img id="info-logo" src="assets/2d/image/info-logo.png">
+            <img id="start-learning" src="assets/2d/image/start-learning.png">
+            <img id="hud" src="assets/2d/image/hud.png">
+            <img id="hud2" src="assets/2d/image/hud2.png">
+            <img id="hud3" src="assets/2d/image/hud3.png">
+            <img id="hud4" src="assets/2d/image/hud4.png">
+            <img id="hud5" src="assets/2d/image/hud5.png">
+            <img id="hud0" src="assets/2d/image/hud0.png">
+            <img id="arrow" src="assets/2d/image/arrow.png">
+            <img id="welcome-physics" src="assets/2d/image/welcome-physics-em.png">
+            <img id="lambda" src="assets/2d/image/lambda.png">
+            <img id="continue" src="assets/2d/image/continue.png">
+            <img id="exit" src="assets/2d/image/exit.png">
             <a-asset-item id="street-lamp-obj" src="assets/3d/street-light/model.gltf"></a-asset-item>
             <a-asset-item id="street-lamp-mtl" src="assets/3d/street-light/materials.mtl"></a-asset-item>
             <a-asset-item id="hologram-glb" src="assets/3d/hologram/hologram.glb"></a-asset-item>
             <a-asset-item id="downhill-glb" src="assets/3d/downhill/downhill.glb"></a-asset-item>
-            <a-asset-item id="em-waves-glb" src="assets/3d/em-waves/em-waves-01.glb"></a-asset-item>
+            <a-asset-item id="em-waves-glb" src="assets/3d/em-waves/EM waves v2.glb"></a-asset-item>
             <a-asset-item id="vector" src="assets/3d/em-waves/vector.glb"></a-asset-item>
         </a-assets>
 
@@ -44,13 +64,20 @@
 
                 <a-entity gltf-model="#hologram-glb" scale="0.5 0.5 0.5" position="-0.3 0 -2.5" rotation="0 -45 0"></a-entity>
 
-                <!--a-entity id="em-waves" gltf-model="#em-waves-glb" scale="1 1 1" position="0 1 -2" rotation="0 0 0" visible="false" animation-mixer>
-                </a-entity-->
-                <a-entity id="em-waves" rotation="0" position="0 0 0" visible="false">
+                <a-entity id="em-waves" gltf-model="#em-waves-glb" scale="0.2 0.2 0.2" position="-0.5 0.8 -2" rotation="0 -90 0" visible="true" animation-mixer>
+                </a-entity>
+
+                <a-entity id="wavelength-glb" gltf-model="#vector" scale="2 2 0.2" position="-0.16 1 -2" rotation="0 90 90" visible="false">
+                </a-entity>
+                <!--a-entity id="wavelength-glb" geometry="primitive: cylinder" material="src:#glow-image; side: double" scale="0.009 0.3 0.009" position="-0.16 1 -2" rotation="0 0 90"></a-entity-->
+
+                <!--a-entity id="em-waves" rotation="0" position="0 0 0" visible="false">
                     <a-entity id="vector" gltf-model="#vector" scale="0.5 0.5 0.3" position="0 1 -2" rotation="0 0 0" visible="true"></a-entity>
                     <a-entity class="clickable" id="electric-field" gltf-model="#vector" material="shader:flat; color:red" scale="0.2 0.5 0.3" position="-0.61 1 -1.75" rotation="0 -90 0" visible="true"></a-entity>
                     <a-entity class="clickable" id="magnetic-field" gltf-model="#vector" scale="0.2 0.5 0.3" position="-0.61 1.25 -1.98" rotation="0 -90 90" visible="true"></a-entity>
-                </a-entity>
+                </a-entity-->
+
+
 
                 <a-entity geometry="primitive: sphere" material="src:#blur-image-01" position="0 100 -100"></a-entity>
             </a-entity>
@@ -58,20 +85,52 @@
             <a-entity id="2d" rotation="0" position="0 0 0">
                 <a-image src="#glow-image" position="0.1 0.7 -2" rotation="90 0 0" width="2" height="2"></a-image>
 
-                <a-image class="clickable" id="info" src="#info-logo" position="0.05 1.3 -1." rotation="0 0 0" scale="0.1 0.1 0.1" visible="true" animation="property: scale; to: 0.2 0.2 0.2; dur:2000; easing: linear; loop: true">
+                <a-image class="clickable" id="wavelength_btn1" src="#info-logo" position="-0.3 1.05 -2." rotation="0 0 0" scale="0.1 0.1 0.1" visible="false"></a-image>
+                <a-image class="clickable" id="wavelength_btn2" src="#info-logo" position="-0.05 1.05 -2." rotation="0 0 0" scale="0.1 0.1 0.1" visible="false"></a-image>
+                <a-image class="clickable" id="period_btn" src="#info-logo" position="-0.3 1.05 -2." rotation="0 0 0" scale="0.1 0.1 0.1" visible="false" animation="property: position; to: -0.05 1.05 -2; loop: true; dur: 5000;"></a-image>
                 </a-image>
-
-                <a-entity id="intro" text="font: roboto; value: Electromagnetic waves or EM waves are waves that are created as a result of vibrations between an electric field and a magnetic field." position="-0.5 1.5 -1" rotation="0 30 0" visible="false">
+                <a-image class="clickable" id="ampli_btn" src="#info-logo" position="-0.3 0.9 -1.95" rotation="0 0 0" scale="0.1 0.1 0.1" visible="false"></a-image>
+                <a-image id="lambda_hud" src="#lambda" position="-0.18 1.15 -2." rotation="0 0 0" scale="0.2 0.1 0.2" visible="false"></a-image>
+                <a-image id="arrow_hud" src="#arrow" position="-0.3 0.9 -1.95" rotation="0 0 90" scale="0.15 0.05 0.1" visible="false"></a-image>
+                <!--a-entity id="intro" text="font: roboto; value: Electromagnetic waves or EM waves are waves that are created as a result of vibrations between an electric field and a magnetic field." position="-0.5 1.5 -1" rotation="0 30 0" visible="false">
                 </a-entity>
-                <a-image class="clickable" id="startSimulation" src="#start-learning" width="0.4" height="0.2" position="-0.7 1.3 -0.8" rotation="0 30 0" visible="false"></a-image>
+                <a-image class="clickable" id="startSimulation" src="#start-learning" width="0.4" height="0.2" position="-0.7 1.3 -0.8" rotation="0 30 0" visible="false"></a-image-->
+
+                <a-curvedimage src="#glow-image" position="0.08 1 -2" theta-length="350" theta-start="90" radius="0.5" visible="true" scale="1 0.5 1"></a-curvedimage>
+
+                <!--Welcome to Physics EM-->
+                <a-curvedimage id="sk-hud1" src="#welcome-physics" position="0.1 1.8 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="true">
+                    <a-image class="clickable" id="start" src="#start-learning" position="0 -0.45 -0.8" width="0.8" height="0.2" animation="property: scale; to: 1.2 1.2 1.2; dur:2000; easing: linear; loop: true"></a-image>
+                </a-curvedimage>
+
+                <a-curvedimage id="sk-hud2" src="#hud2" position="0.1 1.8 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="false">
+                </a-curvedimage>
+
+                <a-curvedimage id="sk-hud3" src="#hud3" position="0.1 1.8 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="false">
+                </a-curvedimage>
+
+                <a-curvedimage id="sk-hud4" src="#hud4" position="0.1 1.8 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="false">
+                </a-curvedimage>
+
+                <a-curvedimage id="sk-hud5" src="#hud5" position="0.1 1.8 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="false">
+                </a-curvedimage>
+
+                <a-curvedimage id="sk-hud0" src="#hud0" position="0.1 1.8 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="false">
+                    <a-image class="clickable" id="continue_btn" src="#continue" position="0 0.45 -0.8" width="0.8" height="0.2" animation="property: scale; to: 1.2 1.2 1.2; dur:2000; easing: linear; loop: true"></a-image>
+                    <a-image class="clickable" id="exit_btn" src="#exit" position="0 -0.45 -0.8" width="0.8" height="0.2" animation="property: scale; to: 1.2 1.2 1.2; dur:2000; easing: linear; loop: true"></a-image>
+                </a-curvedimage>
+                <!--a-curvedimage src="#hud" position="0.1 2 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="false">
+                    <a-entity id="sk-em-definition" text="font: roboto; value: Welcome to EM-Waves; baseline:top;anchor:center;" position="0 0 0" rotation="0 0 0" visible="true">
+                </a-curvedimage-->
 
                 <!-- Mode two prototype -->
-                <a-entity></a-entity>
-                <!--a-image src="#glow-image" position="0 0.8 -1" rotation="90 0 0" width="2" height="1"></a-image-->
-                <a-entity geometry="primitive:plane" material="color:#00E6FF" position="0.1 0.6 -1.2" scale="0.8 0.2 0.5" rotation="-60 0 0"></a-entity>
-                <a-entity class="clickable" id="gamma" geometry="primitive:plane" material="color:red" position="0.3 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
-                <a-entity class="clickable" id="x-ray" geometry="primitive:plane" material="color:green" position="-0.1 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
-                <a-entity class="clickable" id="ultraviolet" geometry="primitive:plane" material="color:white" position="0.1 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
+                <!--a-entity rotation="0" position="0 0 0">
+                    <a-entity geometry="primitive:plane" material="color:#00E6FF" position="0.1 0.6 -1.2" scale="0.8 0.2 0.5" rotation="-60 0 0"></a-entity>
+                    <a-entity class="clickable" id="gamma" geometry="primitive:plane" material="color:red" position="0.3 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
+                    <a-entity class="clickable" id="x-ray" geometry="primitive:plane" material="color:green" position="-0.1 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
+                    <a-entity class="clickable" id="ultraviolet" geometry="primitive:plane" material="color:white" position="0.1 0.65 -1.15" scale="0.1 0.1 0.1" rotation="-60 0 0"></a-entity>
+                </a-entity-->
+
             </a-entity>
 
             <a-entity id="default-entity">
@@ -90,10 +149,115 @@
 
         </a-entity>
     </a-scene>
-
     <script type="text/javascript">
-        //Create a dialogue system so the user has a guide which one to interact with. 
+        //Dialogue System starts here
+        let wavelength = document.getElementById("wavelength");
+        let emWaves = document.getElementById("em");
+        let gaze = document.getElementById("gaze");
+        let periodAudio = document.getElementById("period");
+        let ampliAudio = document.getElementById("amplitude");
 
+        let wavelength_btn1 = document.getElementById("wavelength_btn1");
+        let wavelength_btn2 = document.getElementById("wavelength_btn2");
+
+        let wavelengthGLB = document.getElementById("wavelength-glb");
+
+        window.onload = function() {
+            welcome.play();
+            welcome.loop = false;
+        }
+
+        //Dialogue System starts here
+
+        /*
+         * Stock Knowledge variable should starts always with sk,
+         * Stock Knowledge
+         * 
+         */
+
+        let skStart = document.querySelector('#start')
+
+        skStart.addEventListener('click', function(e) {
+            //Pause || Stop the audio
+            welcome.pause();
+            //Play audio for EM-Waves
+            emWaves.play();
+            emWaves.loop = false;
+            document.querySelector('#sk-hud1').remove();
+            document.querySelector('#em-waves').setAttribute('visible', 'true');
+            document.querySelector('#sk-hud2').setAttribute('visible', 'true');
+            wavelength_btn1.setAttribute('visible', 'true');
+            //Move the player position near the hologram asset
+            document.getElementById("default_angle").setAttribute('position', {
+                x: 0,
+                y: 1.6,
+                z: -0.6
+            })
+        })
+
+        //Wavelength
+        wavelength_btn1.addEventListener('click', function(e) {
+            wavelength_btn2.setAttribute('visible', 'true');
+            // Play & Stop Audio
+            emWaves.pause();
+            gaze.play();
+
+
+
+        })
+
+        wavelength_btn2.addEventListener('click', function(e) {
+            wavelength_btn1.remove();
+            wavelength_btn2.remove();
+            wavelength.play();
+            document.querySelector('#sk-hud2').remove();
+            document.querySelector('#sk-hud3').setAttribute('visible', 'true');
+            wavelengthGLB.setAttribute('visible', 'true');
+            document.querySelector('#lambda_hud').setAttribute('visible', 'true');
+
+            wavelength.onended = function() {
+                wavelengthGLB.remove();
+                document.querySelector('#period_btn').setAttribute('visible', 'true');
+                document.querySelector('#lambda_hud').remove();
+            };
+        });
+
+
+        document.querySelector('#period_btn').addEventListener('click', function(e) {
+
+            periodAudio.play();
+            periodAudio.loop = false;
+            document.querySelector('#sk-hud3').remove();
+            document.querySelector('#sk-hud4').setAttribute('visible', 'true');
+        })
+
+        periodAudio.onended = function() {
+            document.querySelector('#period_btn').remove();
+            document.querySelector('#ampli_btn').setAttribute('visible', 'true');
+        }
+
+        document.querySelector('#ampli_btn').addEventListener('click', function(e) {
+            ampliAudio.play();
+            ampliAudio.loop = false;
+            document.querySelector('#sk-hud4').remove();
+            document.querySelector('#sk-hud5').setAttribute('visible', 'true');
+            document.querySelector('#ampli_btn').remove();
+            document.querySelector('#arrow_hud').setAttribute('visible', 'true');
+        })
+
+        /*
+        ampliAudio.onended = function() {
+            document.querySelector('#sk-hud5').remove();
+            document.querySelector('#sk-hud0').setAttribute('visible', 'true');
+        }
+        */
+
+
+
+        //
+
+        //Create a dialogue system so the user has a guide which one to interact with. 
+        /*
         //declaration of variable
         let infoBtn = document.querySelector('#info')
         let introduction = document.querySelector('#intro')
@@ -103,8 +267,7 @@
         let xRay = document.querySelector('#x-ray')
         let ultraViolet = document.querySelector('#ultraviolet')
 
-
-        document.querySelector('#info').addEventListener('click', function(e) {
+        document.querySelector('#start-learning').addEventListener('click', function(e) {
             document.querySelector('#intro').setAttribute('visible', 'true');
             document.querySelector('#em-waves').setAttribute('visible', 'true');
             document.querySelector('#startSimulation').setAttribute('visible', 'true');
@@ -112,10 +275,10 @@
             //remove the a-entity, not hide because if you only hide the entity. you ca still interact it in the scene.
             infoBtn.remove();
 
-
         });
 
-        document.querySelector('#startSimulation').addEventListener('click', function(e) {
+
+        document.querySelector('#start-learning').addEventListener('click', function(e) {
             introduction.remove();
             startSim.remove();
             document.getElementById("default_angle").setAttribute('position', {
@@ -150,8 +313,10 @@
         });
 
 
+
         let magneticField = document.querySelector('#magnetic-field');
         let electricField = document.querySelector('#electric-field');
+        let sfEmDef = document.querySelector('#sk-em-definition');
 
         magneticField.addEventListener('click', function(e) {
             console.log("magnetic field");
@@ -160,6 +325,7 @@
         electricField.addEventListener('click', function(e) {
             console.log("electric field");
         });
+        */
     </script>
 </body>
 
