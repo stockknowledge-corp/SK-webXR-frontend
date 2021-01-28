@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EM-Waves 2</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="description" content="">
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.scrollTo(0, 1);
+    </script>
+</head>
+
+<body>
+    <div class="audio">
+        <audio src="" id="mainAudio"></audio>
+    </div>
+    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: false">
+
+
+        <a-camera id="default_angle" camera rotation="0 90 0" position="0 1.6 0" look-controls wasd-controls>
+            <a-entity id="rig" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
+                <a-entity id="mouseCursor" cursor="fuse: true; fuseTimeout: 1000" raycaster="objects: .clickable" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: white; shader: flat; opacity: 0.8" event-set__1="_event: mouseenter; color: springgreen"
+                    event-set__2="_event: mouseleave; color: white" animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1000; from: 1 1 1; to: 0.5 0.5 0.5" animation__mouseleave="property: scale; startEvents: mouseleave; easing: easeInCubic; dur: 200; to: 1 1 1"
+                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 200; to: 1 1 1">
+                </a-entity>
+        </a-camera>
+        <!-- Asset Management -->
+        <a-assets>
+            <img id="blur-image-01" src="assets/2d/glow-gradient/Glow02.png">
+            <img id="glow-image" src="assets/2d/glow-gradient/Glow02.png">
+            <img id="welcome-physics" src="assets/2d/image/welcome-em-2.png">
+            <img id="start-learning" src="assets/2d/image/start-learning.png">
+            <a-asset-item id="street-lamp-obj" src="assets/3d/street-light/model.gltf"></a-asset-item>
+            <a-asset-item id="street-lamp-mtl" src="assets/3d/street-light/materials.mtl"></a-asset-item>
+            <a-asset-item id="hologram-glb" src="assets/3d/hologram/hologram.glb"></a-asset-item>
+            <a-asset-item id="downhill-glb" src="assets/3d/downhill/downhill.glb"></a-asset-item>
+            <a-asset-item id="em-waves-glb" src="assets/3d/em-waves/EM waves v2.glb"></a-asset-item>
+            <a-asset-item id="vector" src="assets/3d/em-waves/vector.glb"></a-asset-item>
+        </a-assets>
+
+        <a-entity id="environment" rotation="0" position="0 0 0">
+            <a-entity id="3d" rotation="0" position="0 0 0">
+                <a-entity gltf-model="#downhill-glb" scale="0.5 0.5 0.5" rotation="0 90 0" position="0 0 5"></a-entity>
+
+                <a-entity gltf-model="#hologram-glb" scale="0.5 0.5 0.5" position="-0.3 0 -2.5" rotation="0 -45 0"></a-entity>
+
+                <a-entity id="em-waves" gltf-model="#em-waves-glb" scale="0.2 0.2 0.2" position="-0.4 0.8 -2" rotation="0 -90 0" visible="false" animation-mixer>
+                </a-entity>
+
+                <a-entity id="wavelength-glb" gltf-model="#vector" scale="2 2 0.2" position="-0.16 1 -2" rotation="0 90 90" visible="false">
+                </a-entity>
+
+                <a-entity geometry="primitive: sphere" material="src:#blur-image-01" position="0 100 -100"></a-entity>
+            </a-entity>
+
+            <a-entity id="2d" rotation="0" position="0 0 0">
+                <a-image src="#glow-image" position="0.1 0.7 -2" rotation="90 0 0" width="2" height="2"></a-image>
+
+                <!--a-entity id="intro" text="font: roboto; value: Electromagnetic waves or EM waves are waves that are created as a result of vibrations between an electric field and a magnetic field." position="-0.5 1.5 -1" rotation="0 30 0" visible="false">
+                </a-entity>
+                <a-image class="clickable" id="startSimulation" src="#start-learning" width="0.4" height="0.2" position="-0.7 1.3 -0.8" rotation="0 30 0" visible="false"></a-image-->
+
+                <a-curvedimage id="hologram-glow" src="#glow-image" position="0.08 1 -2" theta-length="350" theta-start="90" radius="0.5" visible="false" scale="1 0.5 1"></a-curvedimage>
+
+                <!--Welcome to Physics EM-->
+                <a-curvedimage id="mainUI" src="#welcome-physics" position="0.1 1.8 -2" rotation="0 0 0" theta-length="130" theta-start="115" radius="1" visible="true">
+                    <a-image class="clickable" id="start" src="#start-learning" position="0 -0.45 -0.8" width="0.8" height="0.2" visible="true" animation="property: scale; to: 1.2 1.2 1.2; dur:2000; easing: linear; loop: true"></a-image>
+                    <a-image class="clickable" id="exit" src="" href="" position="0 -0.45 -0.8" width="0.8" height="0.2" visible="false" animation="property: scale; to: 1.2 1.2 1.2; dur:2000; easing: linear; loop: true"></a-image>
+                </a-curvedimage>
+
+                <a-entity id="spectrum_panel" rotation="0 " position="0 0 0 " visible="false">
+                    <a-entity geometry="primitive:plane " material="color:#00E6FF;" position="0.1 0.6 -1.2 " scale="0.8 0.35 0.5 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="gamma" geometry="primitive:plane " material="shader:flat; color:#F68D50" position="-0.2 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="x-ray" geometry="primitive:plane " material="shader:flat; color:#F2696B" position="0 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="ultraviolet" geometry="primitive:plane " material="shader:flat; color:#8262AA" position="0.20 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="visible-light" geometry="primitive:plane " material="shader:flat; color:#88C877" position="0.4 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="infrared" geometry="primitive:plane " material="shader:flat; color:#7EBFE9" position="-0.1 0.60 -1.1" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="microwaves" geometry="primitive:plane " material="shader:flat; color:#FAEF5D" position="0.1 0.60 -1.1" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="radiowaves" geometry="primitive:plane " material="shader:flat; color:#1D305F" position="0.3 0.60 -1.1" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                </a-entity>
+            </a-entity>
+
+            <a-entity id="default-entity ">
+                <a-sky color="#ECECEC "></a-sky>
+            </a-entity>
+
+            <a-entity id="lighting " rotation="0 " position="0 ">
+                <a-entity light="type:directional; intensity:0.6; color:#00E6FF " position="1.4 3.6 -5 "></a-entity>
+                <a-entity light="type:point; intensity:0.3; color:#00E6FF " position="1.4 3.6 -5 "></a-entity>
+                <a-entity light="type:point; intensity:1; color:#FF1818 " position="1.4 3.6 "></a-entity>
+                <a-entity light="type:point; intensity:0.5; color:#FFF "></a-entity>
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="hotspots " rotation="0 ">
+
+        </a-entity>
+    </a-scene>
+    <script type="text/javascript">
+        //Declaration of variables
+
+        let gammaBtn = document.querySelector('#gamma');
+        let xRayBtn = document.querySelector('#x-ray');
+        let ultraVioletBtn = document.querySelector('#ultraviolet');
+        let visibleLight = document.querySelector('#visible-light');
+        let infraredBtn = document.querySelector('#infrared');
+        let microWavesBtn = document.querySelector('#microwaves');
+        let radioWavesBtn = document.querySelector('#radiowaves');
+
+        let emWavesGLB = document.querySelector('#em-waves');
+
+        const start = document.getElementById("start");
+
+        let mainAudio = document.getElementById("mainAudio");
+
+
+        var counter = 0;
+
+        window.onload = function() {
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/welcome-em-2.png');
+            mainAudio.setAttribute('src', 'assets/audio/1.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        }
+
+        start.addEventListener('click', function() {
+            mainAudio.pause();
+            document.getElementById("default_angle").setAttribute('position', {
+                x: 0,
+                y: 1.6,
+                z: -0.6
+            })
+            document.getElementById("spectrum_panel").setAttribute('visible', 'true');
+            start.remove();
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/instructions.png');
+            document.getElementById("hologram-glow").setAttribute('visible', 'true');
+            document.getElementById("em-waves").setAttribute('visible', 'true');
+
+            mainAudio.setAttribute('src', 'assets/audio/2.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+
+        });
+
+        //Need to use data structure called Stack
+
+        gammaBtn.addEventListener('click', function() {
+            emWavesGLB.setAttribute('scale', {
+                    x: 0.02,
+                    y: 0.02,
+                    z: 0.02
+                }),
+                emWavesGLB.setAttribute('position', {
+                    x: 0,
+                    y: 0.8,
+                    z: -2
+                })
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/gamma-ray-ui.png');
+            counter++;
+            increaseCounter();
+
+            mainAudio.setAttribute('src', 'assets/audio/3.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        });
+        xRayBtn.addEventListener('click', function() {
+            emWavesGLB.setAttribute('scale', {
+                    x: 0.03,
+                    y: 0.03,
+                    z: 0.03
+                }),
+                emWavesGLB.setAttribute('position', {
+                    x: 0,
+                    y: 0.8,
+                    z: -2
+                })
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/x-ray.png');
+            counter++;
+            increaseCounter();
+
+            mainAudio.setAttribute('src', 'assets/audio/4.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        });
+        ultraVioletBtn.addEventListener('click', function() {
+            emWavesGLB.setAttribute('scale', {
+                    x: 0.05,
+                    y: 0.05,
+                    z: 0.05
+                }),
+                emWavesGLB.setAttribute('position', {
+                    x: -0.05,
+                    y: 0.8,
+                    z: -2
+                })
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/ultraviolet-ui.png');
+            counter++;
+            increaseCounter();
+
+            mainAudio.setAttribute('src', 'assets/audio/5.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        });
+        visibleLight.addEventListener('click', function() {
+            emWavesGLB.setAttribute('scale', {
+                    x: 0.07,
+                    y: 0.07,
+                    z: 0.07
+                }),
+                emWavesGLB.setAttribute('position', {
+                    x: -0.1,
+                    y: 0.8,
+                    z: -2
+                })
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/visible-light-ui.png');
+            counter++;
+            increaseCounter();
+
+            mainAudio.setAttribute('src', 'assets/audio/6.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        });
+        infraredBtn.addEventListener('click', function() {
+            emWavesGLB.setAttribute('scale', {
+                    x: 0.09,
+                    y: 0.09,
+                    z: 0.09
+                }),
+                emWavesGLB.setAttribute('position', {
+                    x: -0.15,
+                    y: 0.8,
+                    z: -2
+                })
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/infrared-ui.png');
+            counter++;
+            increaseCounter();
+
+            mainAudio.setAttribute('src', 'assets/audio/7.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        });
+        microWavesBtn.addEventListener('click', function() {
+            emWavesGLB.setAttribute('scale', {
+                    x: 0.15,
+                    y: 0.15,
+                    z: 0.15
+                }),
+                emWavesGLB.setAttribute('position', {
+                    x: -0.3,
+                    y: 0.8,
+                    z: -2
+                })
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/microwaves.png');
+            counter++;
+            increaseCounter();
+
+            mainAudio.setAttribute('src', 'assets/audio/8.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        });
+        radioWavesBtn.addEventListener('click', function() {
+            emWavesGLB.setAttribute('scale', {
+                    x: 0.3,
+                    y: 0.3,
+                    z: 0.3
+                }),
+                emWavesGLB.setAttribute('position', {
+                    x: -0.6,
+                    y: 0.9,
+                    z: -2
+                })
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/radiowaves.png');
+            counter++;
+            increaseCounter();
+
+            mainAudio.setAttribute('src', 'assets/audio/9.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+        });
+
+
+        ///Counter for the numbers of spectrum interact & show the exit button once its completed.
+        function increaseCounter() {
+
+            if (counter >= 7) {
+                console.log("Congratulations!");
+                setTimeout(showCongratulations, 5000);
+            } else {
+                console.log("Keep Playing!");
+            }
+        }
+
+        function showCongratulations() {
+            mainAudio.setAttribute('src', 'assets/audio/10.mp3');
+            mainAudio.play();
+            mainAudio.loop = false;
+            document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/congratulations.png');
+            document.getElementById("exit").setAttribute('src', 'assets/2d/image/exit.png');
+            document.getElementById("exit").setAttribute('visible', 'true');
+            //
+            document.getElementById("exit").addEventListener('click', function() {
+                //Back to Dashboard
+                location.href = "/dashboard";
+            });
+        }
+    </script>
+</body>
+
+</html>

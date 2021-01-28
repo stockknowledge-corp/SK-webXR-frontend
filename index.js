@@ -11,7 +11,8 @@ const accessRouteOverrideMapping = {
     '/login': [],
     '/register': [],
     '/dashboard': [],
-    '/subject': ['biology', 'chemistry', 'physics', 'mathematics', 'earthscience']
+    '/subject': ['biology', 'chemistry', 'physics', 'mathematics', 'earthscience'],
+    '/subject/physics': ['em-wave', 'em-waves-2']
 }
 
 const accessPointOverride = accessPoint => {
@@ -40,6 +41,11 @@ app.use('/dashboard', express.static(path.join(__dirname, 'public/routes/dashboa
 accessRouteOverrideMapping['/subject'].forEach(
     node => app.use('/subject/' + node, express.static(path.join(__dirname, 'public/assets/' + node)))
 );
+
+
+accessRouteOverrideMapping['/subject/physics'].forEach(
+    node => app.use('/subject/physics/' + node, express.static(path.join(__dirname, 'public/assets/physics/' + node)))
+)
 
 //Set port
 const PORT = process.env.PORT || 5000;
