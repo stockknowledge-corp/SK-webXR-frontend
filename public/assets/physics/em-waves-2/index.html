@@ -118,7 +118,7 @@
         let mainAudio = document.getElementById("mainAudio");
 
 
-        var counter = 0;
+        var counter = 1;
 
         window.onload = function() {
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/welcome-em-2.png');
@@ -143,7 +143,6 @@
             mainAudio.setAttribute('src', 'assets/audio/2.mp3');
             mainAudio.play();
             mainAudio.loop = false;
-
         });
 
         //Need to use data structure called Stack
@@ -160,12 +159,12 @@
                     z: -2
                 })
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/gamma-ray-ui.png');
-            counter++;
             increaseCounter();
 
             mainAudio.setAttribute('src', 'assets/audio/3.mp3');
             mainAudio.play();
             mainAudio.loop = false;
+            console.log(counter);
         });
         xRayBtn.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
@@ -179,12 +178,12 @@
                     z: -2
                 })
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/x-ray.png');
-            counter++;
             increaseCounter();
 
             mainAudio.setAttribute('src', 'assets/audio/4.mp3');
             mainAudio.play();
             mainAudio.loop = false;
+            console.log(counter);
         });
         ultraVioletBtn.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
@@ -198,12 +197,12 @@
                     z: -2
                 })
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/ultraviolet-ui.png');
-            counter++;
             increaseCounter();
 
             mainAudio.setAttribute('src', 'assets/audio/5.mp3');
             mainAudio.play();
             mainAudio.loop = false;
+            console.log(counter);
         });
         visibleLight.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
@@ -217,12 +216,12 @@
                     z: -2
                 })
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/visible-light-ui.png');
-            counter++;
             increaseCounter();
 
             mainAudio.setAttribute('src', 'assets/audio/6.mp3');
             mainAudio.play();
             mainAudio.loop = false;
+            console.log(counter);
         });
         infraredBtn.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
@@ -236,12 +235,12 @@
                     z: -2
                 })
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/infrared-ui.png');
-            counter++;
             increaseCounter();
 
             mainAudio.setAttribute('src', 'assets/audio/7.mp3');
             mainAudio.play();
             mainAudio.loop = false;
+            console.log(counter);
         });
         microWavesBtn.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
@@ -255,12 +254,12 @@
                     z: -2
                 })
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/microwaves.png');
-            counter++;
             increaseCounter();
 
             mainAudio.setAttribute('src', 'assets/audio/8.mp3');
             mainAudio.play();
             mainAudio.loop = false;
+            console.log(counter);
         });
         radioWavesBtn.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
@@ -274,12 +273,49 @@
                     z: -2
                 })
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/radiowaves.png');
-            counter++;
             increaseCounter();
 
             mainAudio.setAttribute('src', 'assets/audio/9.mp3');
             mainAudio.play();
             mainAudio.loop = false;
+            console.log(counter);
+        });
+
+        //seperate button function for score counter.. make this function work only once
+        gammaBtn.addEventListener('click', function() {
+            counter++;
+        }, {
+            once: true
+        });
+        xRayBtn.addEventListener('click', function() {
+            counter++;
+        }, {
+            once: true
+        });
+        ultraVioletBtn.addEventListener('click', function() {
+            counter++;
+        }, {
+            once: true
+        });
+        infraredBtn.addEventListener('click', function() {
+            counter++;
+        }, {
+            once: true
+        });
+        visibleLight.addEventListener('click', function() {
+            counter++;
+        }, {
+            once: true
+        });
+        microWavesBtn.addEventListener('click', function() {
+            counter++;
+        }, {
+            once: true
+        });
+        radioWavesBtn.addEventListener('click', function() {
+            counter++;
+        }, {
+            once: true
         });
 
 
