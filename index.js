@@ -12,7 +12,7 @@ const accessRouteOverrideMapping = {
     '/register': [],
     '/dashboard': [],
     '/subject': ['biology', 'chemistry', 'physics', 'mathematics', 'earthscience'],
-    '/subject/physics': ['em-wave', 'em-waves-2']
+    '/subject/physics': ['em-wave', 'em-spectrum']
 }
 
 const accessPointOverride = accessPoint => {

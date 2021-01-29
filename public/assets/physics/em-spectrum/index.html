@@ -2,22 +2,63 @@
 <html>
 
 <head>
-    <title>EM-Waves 2</title>
+    <title>EM-Spectrum</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="description" content="">
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- preloader -->
+    <script src="https://code.createjs.com/1.0.0/preloadjs.min.js"></script>
     <script type="text/javascript">
         window.scrollTo(0, 1);
     </script>
+    <style>
+        #progress_bar {
+            width: 100%;
+            height: 10px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+        }
+        
+        #loader {
+            width: 8%;
+            height: 100%;
+            border-radius: 25px;
+            transition: width 0.3s ease-in-out;
+            background: rgba(210, 255, 82, 1);
+            background: -moz-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(210, 255, 82, 1)), color-stop(100%, rgba(145, 232, 66, 1)));
+            background: -webkit-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
+            background: -o-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
+            background: -ms-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
+            background: linear-gradient(to right, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
+            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842', GradientType=1);
+        }
+        
+        #loader_percentage {
+            margin: 10px auto;
+            font-size: 25px;
+            width: 60px;
+        }
+    </style>
 </head>
 
 <body>
     <div class="audio">
         <audio src="" id="mainAudio" type="audio/mpeg"></audio>
     </div>
+    <!-- Show custom progress bar to show UI of percentage progress-->
+    <!-- Show custom progress bar to show UI of percentage progress-->
+    <div id="progress_bar">
+        <div id="loader"></div>
+        Please bear with us!
+    </div>
+
+    <!-- Pecentage progress in numbers -->
+    <div id="loader_percentage"></div>
+
     <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: true">
 
         <a-camera id="default_angle" camera rotation="0 90 0" position="0 1.6 0" look-controls wasd-controls>
@@ -100,6 +141,43 @@
         </a-entity>
     </a-scene>
     <script type="text/javascript">
+        //Assets Preloader
+        var loader = document.getElementById("loader");
+        var loaderPercentage = document.getElementById("loader_percentage");
+
+        var assetsQueue = new createjs.LoadQueue();
+
+        assetsQueue.addEventListener('progress', event => {
+            var loaderProgress = Math.floor(event.progress * 100);
+            loader.style.width = loaderProgress + "%";
+            loaderPercentage.innerHTML = loaderProgress + "%";
+            console.log("Progress" + Math.floor(event.progress * 100));
+        });
+
+        assetsQueue.addEventListener('complete', event => {
+            console.log("Complete" + event.prgoress);
+        });
+
+        assetsQueue.addEventListener('loadAsset', handleAssetComplete);
+
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/congratulations.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/exit.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/gamma-ray-ui.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/infrared-ui.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/instructions.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/microwaves.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/radiowaves.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/start-learning.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/ultraviolet-ui.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/welcome-em-2.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/x-ray.png");
+
+        function handleAssetComplete(event) {
+
+            var item = event.item;
+            var type = event.type;
+
+        }
         //Declaration of variables
 
         let gammaBtn = document.querySelector('#gamma');
@@ -148,8 +226,8 @@
 
         gammaBtn.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
-                    x: 0.3,
-                    y: 0.3,
+                    x: 0.02,
+                    y: 0.02,
                     z: 0.02
                 }),
                 emWavesGLB.setAttribute('position', {
