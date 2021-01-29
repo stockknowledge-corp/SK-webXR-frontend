@@ -12,6 +12,37 @@
     <script type="text/javascript">
         window.scrollTo(0, 1);
     </script>
+    <style>
+        .a-loader-title {
+            color: #FFF;
+            background-color: #FF6961;
+            font-size: 2em;
+            font-style: italic;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        #loader {
+            background-image: url("assets/2d/image/sk-loader.gif");
+            width: 100;
+            height: 100;
+            /*animation: spin 1s linear infinite;*/
+        }
+        /*@keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        */
+        
+        .center {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +54,7 @@
         <audio src="assets/audio/em-waves.mp3" id="em" type="audio/mpeg"></audio>
         <audio src="assets/audio/gazeOnPoint.mp3" id="gaze" type="audio/mpeg"></audio>
     </div>
-    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: true">
+    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: true" loading-screen="dotsColor: #FFF; backgroundColor: #FF6961; enabled:true">
 
 
         <a-camera id="default_angle" camera rotation="0 90 0" position="0 1.6 0" look-controls wasd-controls>
@@ -149,6 +180,21 @@
         </a-entity>
     </a-scene>
     <script type="text/javascript">
+        // Preloader
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                    "body").style.visibility = "hidden";
+                document.querySelector(
+                    "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                    "#loader").style.display = "none";
+                document.querySelector(
+                    "body").style.visibility = "visible";
+            }
+        };
+
         //Dialogue System starts here
         let wavelength = document.getElementById("wavelength");
         let emWaves = document.getElementById("em");

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>EM-Spectrum</title>
+    <title>EM Spectrum</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="description" content="">
@@ -15,32 +15,34 @@
         window.scrollTo(0, 1);
     </script>
     <style>
-        #progress_bar {
-            width: 100%;
-            height: 10px;
-            border: 1px solid #ccc;
-            border-radius: 25px;
-        }
-        
         #loader {
-            width: 8%;
-            height: 100%;
-            border-radius: 25px;
-            transition: width 0.3s ease-in-out;
-            background: rgba(210, 255, 82, 1);
-            background: -moz-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
-            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(210, 255, 82, 1)), color-stop(100%, rgba(145, 232, 66, 1)));
-            background: -webkit-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
-            background: -o-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
-            background: -ms-linear-gradient(left, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
-            background: linear-gradient(to right, rgba(210, 255, 82, 1) 0%, rgba(145, 232, 66, 1) 100%);
-            filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842', GradientType=1);
+            background-image: url("assets/2d/image/sk-loader.gif");
+            width: 100;
+            height: 100;
+            /*animation: spin 1s linear infinite;*/
+        }
+        /*@keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        */
+        
+        .center {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
         }
         
-        #loader_percentage {
-            margin: 10px auto;
-            font-size: 25px;
-            width: 60px;
+        .a-loader-title {
+            color: #FFF;
+            background-color: #CAE7C1;
+            font-size: 2em;
+            font-style: italic;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
         }
     </style>
 </head>
@@ -49,17 +51,9 @@
     <div class="audio">
         <audio src="" id="mainAudio" type="audio/mpeg"></audio>
     </div>
-    <!-- Show custom progress bar to show UI of percentage progress-->
-    <!-- Show custom progress bar to show UI of percentage progress-->
-    <div id="progress_bar">
-        <div id="loader"></div>
-        Please bear with us!
+    <div id="loader" class="center">
     </div>
-
-    <!-- Pecentage progress in numbers -->
-    <div id="loader_percentage"></div>
-
-    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: true">
+    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: true" loading-screen="dotsColor: #FFF; backgroundColor: #CAE7C1; enabled:true">
 
         <a-camera id="default_angle" camera rotation="0 90 0" position="0 1.6 0" look-controls wasd-controls>
             <a-entity id="rig" movement-controls="controls: checkpoint" checkpoint-controls="mode: animate">
@@ -70,6 +64,7 @@
         </a-camera>
         <!-- Asset Management -->
         <a-assets>
+            <img id="loader-bg" src="assets/2d/bg.png">
             <img id="blur-image-01" src="assets/2d/glow-gradient/Glow02.png">
             <img id="glow-image" src="assets/2d/glow-gradient/Glow02.png">
             <img id="welcome-physics" src="assets/2d/image/welcome-em-2.png">
@@ -142,42 +137,37 @@
     </a-scene>
     <script type="text/javascript">
         //Assets Preloader
-        var loader = document.getElementById("loader");
-        var loaderPercentage = document.getElementById("loader_percentage");
 
         var assetsQueue = new createjs.LoadQueue();
 
-        assetsQueue.addEventListener('progress', event => {
-            var loaderProgress = Math.floor(event.progress * 100);
-            loader.style.width = loaderProgress + "%";
-            loaderPercentage.innerHTML = loaderProgress + "%";
-            console.log("Progress" + Math.floor(event.progress * 100));
-        });
-
-        assetsQueue.addEventListener('complete', event => {
-            console.log("Complete" + event.prgoress);
-        });
-
-        assetsQueue.addEventListener('loadAsset', handleAssetComplete);
-
         assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/congratulations.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/exit.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/gamma-ray-ui.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/infrared-ui.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/instructions.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/microwaves.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/radiowaves.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/start-learning.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/ultraviolet-ui.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/welcome-em-2.png");
-        assetsQueue.loadFile("/subject/physics/em-spectrum//assets/2d/image/x-ray.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/exit.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/gamma-ray-ui.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/infrared-ui.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/instructions.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/microwaves.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/radiowaves.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/start-learning.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/ultraviolet-ui.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/welcome-em-2.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/image/x-ray.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/glow-gradient/glow1.png");
+        assetsQueue.loadFile("/subject/physics/em-spectrum/assets/2d/glow-gradient/Glow02.png");
 
-        function handleAssetComplete(event) {
+        document.onreadystatechange = function() {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                    "body").style.visibility = "hidden";
+                document.querySelector(
+                    "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                    "#loader").style.display = "none";
+                document.querySelector(
+                    "body").style.visibility = "visible";
+            }
+        };
 
-            var item = event.item;
-            var type = event.type;
-
-        }
         //Declaration of variables
 
         let gammaBtn = document.querySelector('#gamma');
@@ -418,6 +408,20 @@
             document.getElementById("exit").addEventListener('click', function() {
                 //Back to Dashboard
                 location.href = "/dashboard";
+            });
+        }
+
+
+        // Offline Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    // registration failed :(
+                    console.log('ServiceWorker registration failed: ', err);
+                });
             });
         }
     </script>
