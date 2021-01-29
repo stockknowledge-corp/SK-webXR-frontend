@@ -1,0 +1,18 @@
+.font-poppins {
+    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+  }
+
+.cstm-height-card .card-img-top {
+    height: 100px;
+    object-fit: cover;
+  }
+
+  /*
+BACKGROUND*/
+.bg-gra-02 {
+  background: -webkit-gradient(linear, left bottom, left top, from(#54B2F8), to(#54B2F8));
+  background: -webkit-linear-gradient(bottom, #54B2F8 0%, #54B2F8 100%);
+  background: -moz-linear-gradient(bottom, #54B2F8 0%, #54B2F8 100%);
+  background: -o-linear-gradient(bottom, #54B2F8 0%, #54B2F8 100%);
+  background: linear-gradient(to top, #54B2F8 0%, #54B2F8 100%);
+}
