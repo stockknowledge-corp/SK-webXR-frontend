@@ -18,7 +18,7 @@
     <div class="audio">
         <audio src="" id="mainAudio"></audio>
     </div>
-    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: false">
+    <a-scene fog="type: exponential; density: 0.1; color: #10454A;" vr-mode-ui="enabled: true">
 
 
         <a-camera id="default_angle" camera rotation="0 90 0" position="0 1.6 0" look-controls wasd-controls>
@@ -149,8 +149,8 @@
 
         gammaBtn.addEventListener('click', function() {
             emWavesGLB.setAttribute('scale', {
-                    x: 0.02,
-                    y: 0.02,
+                    x: 0.3,
+                    y: 0.3,
                     z: 0.02
                 }),
                 emWavesGLB.setAttribute('position', {
