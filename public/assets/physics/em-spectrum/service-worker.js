@@ -1,5 +1,5 @@
 // Offline Service Worker
-const staticCache = 'sk-site-static-offline';
+const staticCache = 'sk-site-static-offline-em-spectrum';
 const toCache = [
     '/',
     '/subject/physics/em-spectrum/main.css',

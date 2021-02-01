@@ -15,32 +15,10 @@
     <style>
         .a-loader-title {
             color: #FFF;
-            background-color: #FF6961;
+            background-color: #CAE7C1;
             font-size: 2em;
             font-style: italic;
-            font-family: 'Courier New', Courier, monospace;
-        }
-        
-        #loader {
-            background-image: url("assets/2d/image/sk-loader.gif");
-            width: 100;
-            height: 100;
-            /*animation: spin 1s linear infinite;*/
-        }
-        /*@keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        */
-        
-        .center {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
         }
     </style>
 </head>
@@ -84,7 +62,7 @@
             <a-asset-item id="street-lamp-mtl" src="assets/3d/street-light/materials.mtl"></a-asset-item>
             <a-asset-item id="hologram-glb" src="assets/3d/hologram/hologram.glb"></a-asset-item>
             <a-asset-item id="downhill-glb" src="assets/3d/downhill/downhill.glb"></a-asset-item>
-            <a-asset-item id="em-waves-glb" src="assets/3d/em-waves/EM waves v2.glb"></a-asset-item>
+            <a-asset-item id="em-waves-glb" src="assets/3d/em-waves/em-waves-v2.glb"></a-asset-item>
             <a-asset-item id="vector" src="assets/3d/em-waves/vector.glb"></a-asset-item>
         </a-assets>
 
@@ -180,21 +158,6 @@
         </a-entity>
     </a-scene>
     <script type="text/javascript">
-        // Preloader
-        document.onreadystatechange = function() {
-            if (document.readyState !== "complete") {
-                document.querySelector(
-                    "body").style.visibility = "hidden";
-                document.querySelector(
-                    "#loader").style.visibility = "visible";
-            } else {
-                document.querySelector(
-                    "#loader").style.display = "none";
-                document.querySelector(
-                    "body").style.visibility = "visible";
-            }
-        };
-
         //Dialogue System starts here
         let wavelength = document.getElementById("wavelength");
         let emWaves = document.getElementById("em");
@@ -291,87 +254,18 @@
             document.querySelector('#arrow_hud').setAttribute('visible', 'true');
         })
 
-        /*
-        ampliAudio.onended = function() {
-            document.querySelector('#sk-hud5').remove();
-            document.querySelector('#sk-hud0').setAttribute('visible', 'true');
+        // Offline Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                    // Registration was successful
+                    //console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    // registration failed :(
+                    //console.log('ServiceWorker registration failed: ', err);
+                });
+            });
         }
-        */
-
-
-
-        //
-
-        //Create a dialogue system so the user has a guide which one to interact with. 
-        /*
-        //declaration of variable
-        let infoBtn = document.querySelector('#info')
-        let introduction = document.querySelector('#intro')
-        let startSim = document.querySelector('#startSimulation')
-
-        let gamma = document.querySelector('#gamma')
-        let xRay = document.querySelector('#x-ray')
-        let ultraViolet = document.querySelector('#ultraviolet')
-
-        document.querySelector('#start-learning').addEventListener('click', function(e) {
-            document.querySelector('#intro').setAttribute('visible', 'true');
-            document.querySelector('#em-waves').setAttribute('visible', 'true');
-            document.querySelector('#startSimulation').setAttribute('visible', 'true');
-
-            //remove the a-entity, not hide because if you only hide the entity. you ca still interact it in the scene.
-            infoBtn.remove();
-
-        });
-
-
-        document.querySelector('#start-learning').addEventListener('click', function(e) {
-            introduction.remove();
-            startSim.remove();
-            document.getElementById("default_angle").setAttribute('position', {
-                x: 0,
-                y: 1.6,
-                z: -0.6
-            })
-        });
-
-        gamma.addEventListener('click', function(e) {
-            document.getElementById("em-waves").setAttribute('scale', {
-                x: 0.3,
-                y: 0.3,
-                z: 0.3
-            })
-        });
-
-        xRay.addEventListener('click', function(e) {
-            document.getElementById("em-waves").setAttribute('scale', {
-                x: 0.5,
-                y: 0.5,
-                z: 0.5
-            })
-        });
-
-        ultraviolet.addEventListener('click', function(e) {
-            document.getElementById("em-waves").setAttribute('scale', {
-                x: 0.8,
-                y: 0.8,
-                z: 0.8
-            })
-        });
-
-
-
-        let magneticField = document.querySelector('#magnetic-field');
-        let electricField = document.querySelector('#electric-field');
-        let sfEmDef = document.querySelector('#sk-em-definition');
-
-        magneticField.addEventListener('click', function(e) {
-            console.log("magnetic field");
-        });
-
-        electricField.addEventListener('click', function(e) {
-            console.log("electric field");
-        });
-        */
     </script>
 </body>
 
