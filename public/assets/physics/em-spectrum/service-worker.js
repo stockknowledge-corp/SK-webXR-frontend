@@ -39,7 +39,8 @@ const toCache = [
     '/subject/physics/em-spectrum/assets/audio/7.mp3',
     '/subject/physics/em-spectrum/assets/audio/8.mp3',
     '/subject/physics/em-spectrum/assets/audio/9.mp3',
-    '/subject/physics/em-spectrum/assets/audio/10.mp3'
+    '/subject/physics/em-spectrum/assets/audio/10.mp3',
+    'service-worker.js'
 ];
 
 //Install server worker

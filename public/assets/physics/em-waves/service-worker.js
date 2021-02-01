@@ -27,7 +27,8 @@ const toCache = [
     '/subject/physics/em-waves/assets/audio/gazeOnPoint.mp3',
     '/subject/physics/em-waves/assets/audio/period.mp3',
     '/subject/physics/em-waves/assets/audio/wavelength.mp3',
-    '/subject/physics/em-waves/assets/audio/welcomephysics.mp3'
+    '/subject/physics/em-waves/assets/audio/welcomephysics.mp3',
+    'service-worker.js'
 ];
 
 //Install server worker

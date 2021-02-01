@@ -15,7 +15,8 @@ const toCache = [
     '/img/11.png',
     '/img/12.png',
     '/img/bg.png',
-    '/img/logo.png'
+    '/img/logo.png',
+    '/js/main.js'
 ];
 
 //Install server worker
