@@ -40,7 +40,14 @@ const toCache = [
     '/subject/physics/em-spectrum/assets/audio/8.mp3',
     '/subject/physics/em-spectrum/assets/audio/9.mp3',
     '/subject/physics/em-spectrum/assets/audio/10.mp3',
-    'service-worker.js'
+    'service-worker.js',
+    '/subject/physics/em-spectrum/assets/3d/em-waves/Gamma-final.glb',
+    '/subject/physics/em-spectrum/assets/3d/em-waves/Xray-final.glb',
+    '/subject/physics/em-spectrum/assets/3d/em-waves/Ultraviolet-final.glb',
+    '/subject/physics/em-spectrum/assets/3d/em-waves/Visible-final.glb',
+    '/subject/physics/em-spectrum/assets/3d/em-waves/Infrared-final.glb',
+    '/subject/physics/em-spectrum/assets/3d/em-waves/Microwaves-final.glb',
+    '/subject/physics/em-spectrum/assets/3d/em-waves/Radiowaves-final.glb'
 ];
 
 //Install server worker
@@ -57,7 +64,7 @@ self.addEventListener('install', function(event) {
 
 //Activate event
 self.addEventListener('activate', evt => {
-    console.log('service worker has been activated');
+    return self.clients.claim();
 })
 
 //fetch event

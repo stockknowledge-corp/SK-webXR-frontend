@@ -78,6 +78,14 @@
             <a-asset-item id="hologram-glb" src="assets/3d/hologram/hologram.glb"></a-asset-item>
             <a-asset-item id="downhill-glb" src="assets/3d/downhill/downhill.glb"></a-asset-item>
             <a-asset-item id="em-waves-glb" src="assets/3d/em-waves/em-waves-v2.glb"></a-asset-item>
+            <img id="gamma-btn" src="assets/2d/image/gamma-btn.png">
+            <img id="xray-btn" src="assets/2d/image/xray-btn.png">
+            <img id="ultraviolet-btn" src="assets/2d/image/ultraviolet-btn.png">
+            <img id="visible-btn" src="assets/2d/image/visible-btn.png">
+            <img id="infrared-btn" src="assets/2d/image/infrared-btn.png">
+            <img id="microwave-btn" src="assets/2d/image/microwave-btn.png">
+            <img id="radiowave-btn" src="assets/2d/image/radiowave-btn.png">
+
         </a-assets>
 
         <a-entity id="environment" rotation="0" position="0 0 0">
@@ -86,7 +94,7 @@
 
                 <a-entity gltf-model="#hologram-glb" scale="0.5 0.5 0.5" position="-0.3 0 -2.5" rotation="0 -45 0"></a-entity>
 
-                <a-entity id="em-waves" gltf-model="#em-waves-glb" scale="0.2 0.2 0.2" position="-0.4 0.8 -2" rotation="0 -90 0" visible="true" animation-mixer>
+                <a-entity id="em-waves" gltf-model="" scale="0.2 0.2 0.2" position="-0.4 0.8 -2" rotation="0 -90 0" visible="true" animation-mixer>
                 </a-entity>
 
                 <a-entity geometry="primitive: sphere" material="src:#blur-image-01" position="0 100 -100"></a-entity>
@@ -107,15 +115,15 @@
                     <a-image class="clickable" id="exit" src="" href="" position="0 -0.45 -0.8" width="0.8" height="0.2" visible="false" animation="property: scale; to: 1.2 1.2 1.2; dur:2000; easing: linear; loop: true"></a-image>
                 </a-curvedimage>
 
-                <a-entity id="spectrum_panel" rotation="0 " position="0 0 0 " visible="false">
+                <a-entity id="spectrum_panel" rotation="0 " position="0 0 0 " visible="true">
                     <a-entity geometry="primitive:plane " material="color:#00E6FF;" position="0.1 0.6 -1.2 " scale="0.8 0.35 0.5 " rotation="-60 0 0 "></a-entity>
-                    <a-entity class="clickable " id="gamma" geometry="primitive:plane " material="shader:flat; color:#F68D50" position="-0.2 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
-                    <a-entity class="clickable " id="x-ray" geometry="primitive:plane " material="shader:flat; color:#F2696B" position="0 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
-                    <a-entity class="clickable " id="ultraviolet" geometry="primitive:plane " material="shader:flat; color:#8262AA" position="0.20 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
-                    <a-entity class="clickable " id="visible-light" geometry="primitive:plane " material="shader:flat; color:#88C877" position="0.4 0.65 -1.25" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
-                    <a-entity class="clickable " id="infrared" geometry="primitive:plane " material="shader:flat; color:#7EBFE9" position="-0.1 0.60 -1.1" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
-                    <a-entity class="clickable " id="microwaves" geometry="primitive:plane " material="shader:flat; color:#FAEF5D" position="0.1 0.60 -1.1" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
-                    <a-entity class="clickable " id="radiowaves" geometry="primitive:plane " material="shader:flat; color:#1D305F" position="0.3 0.60 -1.1" scale="0.1 0.1 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="gamma" geometry="primitive:box " material="shader: flat; src: #gamma-btn" position="-0.2 0.65 -1.25" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="x-ray" geometry="primitive:box " material="shader:flat; src: #xray-btn" position="0 0.65 -1.25" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="ultraviolet" geometry="primitive:box " material="shader:flat; src: #ultraviolet-btn" position="0.20 0.65 -1.25" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="visible-light" geometry="primitive:box " material="shader:flat; src: #visible-btn" position="0.4 0.65 -1.25" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="infrared" geometry="primitive:box " material="shader:flat; src: #infrared-btn" position="-0.1 0.60 -1.1" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="microwaves" geometry="primitive:box " material="shader:flat; src: #microwave-btn" position="0.1 0.60 -1.1" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
+                    <a-entity class="clickable " id="radiowaves" geometry="primitive:box " material="shader:flat; src: #radiowave-btn" position="0.3 0.60 -1.1" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
                 </a-entity>
             </a-entity>
 
@@ -215,12 +223,17 @@
         //Need to use data structure called Stack
 
         gammaBtn.addEventListener('click', function() {
-            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/gamma-ray.glb'),
+            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Gamma-final.glb'),
                 emWavesGLB.setAttribute('position', {
                     x: -0.5,
                     y: 0.7,
                     z: -2
-                })
+                }),
+                emWavesGLB.setAttribute('scale', {
+                    x: 0.2,
+                    y: 0.2,
+                    z: 0.2
+                });
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/gamma-ray-ui.png');
             increaseCounter();
 
@@ -230,12 +243,17 @@
             console.log(counter);
         });
         xRayBtn.addEventListener('click', function() {
-            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/xray.glb'),
+            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Xray-final.glb'),
                 emWavesGLB.setAttribute('position', {
                     x: -0.5,
                     y: 0.85,
                     z: -2
-                })
+                }),
+                emWavesGLB.setAttribute('scale', {
+                    x: 0.2,
+                    y: 0.2,
+                    z: 0.2
+                });
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/x-ray.png');
             increaseCounter();
 
@@ -245,12 +263,17 @@
             console.log(counter);
         });
         ultraVioletBtn.addEventListener('click', function() {
-            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/ultraviolet.glb'),
+            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Ultraviolet-final.glb'),
                 emWavesGLB.setAttribute('position', {
                     x: -0.4,
                     y: 0.9,
                     z: -2
-                })
+                }),
+                emWavesGLB.setAttribute('scale', {
+                    x: 0.2,
+                    y: 0.2,
+                    z: 0.2
+                });
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/ultraviolet-ui.png');
             increaseCounter();
 
@@ -260,12 +283,17 @@
             console.log(counter);
         });
         visibleLight.addEventListener('click', function() {
-            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Visible.glb'),
+            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Visible-final.glb'),
                 emWavesGLB.setAttribute('position', {
                     x: -0.45,
                     y: 0.8,
                     z: -2
-                })
+                }),
+                emWavesGLB.setAttribute('scale', {
+                    x: 0.2,
+                    y: 0.2,
+                    z: 0.2
+                });
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/visible-light-ui.png');
             increaseCounter();
 
@@ -275,12 +303,17 @@
             console.log(counter);
         });
         infraredBtn.addEventListener('click', function() {
-            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Infrared.glb'),
+            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Infrared-final.glb'),
                 emWavesGLB.setAttribute('position', {
                     x: -0.65,
                     y: 0.85,
                     z: -2
-                })
+                }),
+                emWavesGLB.setAttribute('scale', {
+                    x: 0.2,
+                    y: 0.2,
+                    z: 0.2
+                });
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/infrared-ui.png');
             increaseCounter();
 
@@ -290,7 +323,7 @@
             console.log(counter);
         });
         microWavesBtn.addEventListener('click', function() {
-            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/microwaves.glb'),
+            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Microwaves-final.glb'),
                 emWavesGLB.setAttribute('position', {
                     x: 0.6,
                     y: 0.9,
@@ -300,7 +333,12 @@
                     x: 0,
                     y: 90,
                     z: 0
-                })
+                }),
+                emWavesGLB.setAttribute('scale', {
+                    x: 0.2,
+                    y: 0.2,
+                    z: 0.2
+                });
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/microwaves.png');
             increaseCounter();
 
@@ -310,7 +348,7 @@
             console.log(counter);
         });
         radioWavesBtn.addEventListener('click', function() {
-            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/radiowaves.glb'),
+            emWavesGLB.setAttribute('gltf-model', 'assets/3d/em-waves/Radiowaves-final.glb'),
                 emWavesGLB.setAttribute('position', {
                     x: 1.3,
                     y: 0.9,
@@ -325,7 +363,7 @@
                     x: 0.3,
                     y: 0.3,
                     z: 0.4
-                })
+                });
             document.getElementById("mainUI").setAttribute('src', 'assets/2d/image/radiowaves.png');
             increaseCounter();
 
@@ -411,6 +449,29 @@
                 });
             });
         }
+
+        //declare variables for use in the event listener
+        var currentPath = window.location.pathname;
+        var cacheButton = document.querySelector('.offline-btn');
+        var imageArray = document.querySelector('img');
+
+        //Event listener
+        window.addEventListener('offline', () => {
+            event.preventDefault();
+
+            var pageResources = [currentPath];
+            caches.open('offline-' + currentPath).then(function(cache) {
+                var updateCache = cache.addAll(pageResources);
+
+                // Update UI to indicate success
+                // Or catch any errors if it doesn't succeed
+                updateCache.then(function() {
+                    console.log('Article is now available offline.');
+                }).catch(function(error) {
+                    console.log('Article could not be saved offline.');
+                });
+            });
+        });
     </script>
 </body>
 
