@@ -115,7 +115,7 @@
                     <a-image class="clickable" id="exit" src="" href="" position="0 -0.45 -0.8" width="0.8" height="0.2" visible="false" animation="property: scale; to: 1.2 1.2 1.2; dur:2000; easing: linear; loop: true"></a-image>
                 </a-curvedimage>
 
-                <a-entity id="spectrum_panel" rotation="0 " position="0 0 0 " visible="true">
+                <a-entity id="spectrum_panel" rotation="0 " position="0 0 0 " visible="false">
                     <a-entity geometry="primitive:plane " material="color:#00E6FF;" position="0.1 0.6 -1.2 " scale="0.8 0.35 0.5 " rotation="-60 0 0 "></a-entity>
                     <a-entity class="clickable " id="gamma" geometry="primitive:box " material="shader: flat; src: #gamma-btn" position="-0.2 0.65 -1.25" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
                     <a-entity class="clickable " id="x-ray" geometry="primitive:box " material="shader:flat; src: #xray-btn" position="0 0.65 -1.25" scale="0.1 0.06 0.1 " rotation="-60 0 0 "></a-entity>
@@ -137,10 +137,6 @@
                 <a-entity light="type:point; intensity:1; color:#FF1818 " position="1.4 3.6 "></a-entity>
                 <a-entity light="type:point; intensity:0.5; color:#FFF "></a-entity>
             </a-entity>
-        </a-entity>
-
-        <a-entity id="hotspots " rotation="0 ">
-
         </a-entity>
     </a-scene>
     <script type="text/javascript">
